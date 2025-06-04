@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tilina Pollito</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #fff176, #fff59d);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 70px; /* espacio para el footer */
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #5c3d00;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 2px #fff;
+    }
+
+    .contenedor {
+      position: relative;
+    }
+
+    #boton-pollito {
+      background-color: #ffeb3b;
+      border: none;
+      border-radius: 20px;
+      padding: 20px 30px;
+      font-size: 40px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      z-index: 1;
+      position: relative;
+    }
+
+    #boton-pollito:hover {
+      transform: scale(1.1);
+    }
+
+    .mensaje {
+      position: absolute;
+      background: white;
+      color: #333;
+      font-size: 18px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      animation: caer 10s forwards;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    @keyframes caer {
+      0% {
+        opacity: 1;
+        transform: var(--inicio);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(0, 0);
+      }
+    }
+
+    /* Footer estilo */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #fff9c4;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      font-family: 'Poppins', sans-serif;
+      z-index: 10;
+    }
+
+    #boton-sorpresa {
+      background-color: #fdd835;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+      font-weight: 600;
+    }
+
+    #boton-sorpresa:hover {
+      background-color: #fbc02d;
+    }
+  </style>
+</head>
+<body>
+  <h1>issa, tqm, siempre serás mi tilina fav</h1>
+
+  <div class="contenedor">
+    <button id="boton-pollito">🐥</button>
+  </div>
+
+  <audio id="sonido-piu" src="piu.mp3" preload="auto"></audio>
+
+  <script>
+    const mensajes = [
+      "Hola Issam :)💛",
+      "Esta página la hice por tus 18 🐥",
+      "Gracias por ser alguien bella, de verdad lo aprecio 🌼",
+      "Eres mensa si crees que me caes mal o algo así 💫",
+      "Nunca te cambiaría, eres única en este mundo, gay 💛",
+      "No me gusta ser cursi contigo, me da pena ✨",
+      "Hablame si quieres contar algo estúpido :D",
+      "Riete conmigo si estas más llevada de lo normal.",
+      "Y si no me hablas, está bien, yo siempre estaré para tí ;)",
+      "No sigas presionado el fukin pollo",
+      "NO ME GUSTA SER CURSI, GAY",
+      "No hay mas nada que leer aquí",
+      "te quiero mucho",
+      "Para ya wn",
+      "Latitud: 6.287501 | Longitud: -75.556418",
+      "JADSKLKJDSAJKLSAD son las coordenadas de tu casa",
+      "Pero sí, cuidate mucho, espero pases un buen día",
+      "Te quiere, Mocho."
+    ];
+
+    const direcciones = [
+      'translate(-300px, -300px)',
+      'translate(300px, -300px)',
+      'translate(-300px, 300px)',
+      'translate(300px, 300px)',
+      'translate(0, -400px)',
+      'translate(-400px, 0)',
+      'translate(400px, 0)',
+      'translate(0, 400px)'
+    ];
+
+    let contador = 0;
+    const boton = document.getElementById("boton-pollito");
+    const sonido = document.getElementById("sonido-piu");
+    const contenedor = document.querySelector(".contenedor");
+
+    boton.addEventListener("click", () => {
+      sonido.currentTime = 0;
+      sonido.play();
+
+      const mensaje = document.createElement("div");
+      mensaje.className = "mensaje";
+      mensaje.textContent = mensajes[contador % mensajes.length];
+      contador++;
+
+      const direccion = direcciones[Math.floor(Math.random() * direcciones.length)];
+      mensaje.style.setProperty('--inicio', direccion);
+      mensaje.style.left = "50%";
+      mensaje.style.top = "50%";
+      mensaje.style.transform = direccion;
+
+      contenedor.appendChild(mensaje);
+
+      setTimeout(() => {
+        mensaje.remove();
+      }, 10000);
+    });
+  </script>
+
+  <footer>
+    <button id="boton-sorpresa" onclick="window.open('https://youtu.be/H8zjPJA2cdk?si=Hwff9BICuRPwo1wN', '_blank')">
+      🎵 Ey, te regalo una canción :D
+    </button>
+  </footer>
+</body>
+</html>
